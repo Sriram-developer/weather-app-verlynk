@@ -52,7 +52,8 @@ function App() {
 
        <button className="bg-green-400 w-full py-3 text-white text-sm font-bold hover:scale-105 transition-all duration-200 ease-in-out">Get Weather</button>
        <div>
-        
+        <p>{selectedCountry?.label} | {selectedCity?.label}</p> 
+        <p>Cooridinates: {selectedCity?.value?.latitude} | {" "} {selectedCity?.value?.longitude}</p>
        </div>
       </div>
       {/* Body */}
