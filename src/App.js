@@ -23,8 +23,13 @@ function App() {
   const handleSelectedCountry = (option) => {
    setSelectedCountry (option);
    setSeletedCity(null);
-
   };
+
+   const handleSelectedCity = (option) => {
+    setSeletedCity(option);
+   };
+
+  
   return (
     <div>
       {/* Sidebar */}
@@ -32,9 +37,23 @@ function App() {
        {/* Form */}
        <Select options={allCountries} value={selectedCountry} onChange={handleSelectedCountry}/>
 
-       <Select options={City.getCitiesOfCountry(selectedCountry?.value?.isoCode)}/>
-       
+       <Select options={City.getCitiesOfCountry(selectedCountry?.value?.isoCode).map(
+        (city) => ({
+          value: {
+            latitude: city.latitude,
+            longitude: city.longitude,
+          },
+          label: city.name
+        })
+       )}
+       value={selectedCity}
+       onChange={handleSelectedCity}
+       />
+
        <button className="bg-green-400 w-full py-3 text-white text-sm font-bold hover:scale-105 transition-all duration-200 ease-in-out">Get Weather</button>
+       <div>
+        
+       </div>
       </div>
       {/* Body */}
       <div></div>
