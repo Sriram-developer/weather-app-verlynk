@@ -5,19 +5,20 @@ import { Card,Title,AreaChart } from "@tremor/react";
 function AreaChartCard({ weatherDetails }) {
     const [chartData, setChartData] = useState([]);
  useEffect(() => {
-    const hourly = weatherDetails?.hourly?.time?.map((time) => new Date(time).toLocaleString("en-US , { hour:"numeric", hour12: false }).slice(0, 24))
+    const hourly = weatherDetails?.hourly?.time?.map((time) => new Date(time).toLocaleString("en-US" , { hour:"numeric", hour12: false }).slice(0, 24))
 
-    hourly?.map((hour, i) => (
-        setChartData({
+  
+        setChartData(
+            hourly?.map((hour, i) => ({
             Time: Number(hour),
-            "Temperature (C)": weatherDetails?.hourly?.apparent_temperature[i],
-        })
-    ) )
- }, [])
+            "Temperature (C)": weatherDetails?.hourly?.temperature_2m[i],
+        }))
+    );
+ }, [weatherDetails]);
   return(
      <Card>
-  <Title>Temperature v/s Time</Title>
-  <AreaChart data={chartData} index="Time" categories={['Temperature (C)']} colors='{["indigo"]}'/>
+  <Title>Temperature over Time (C)</Title>
+  <AreaChart data={chartData} index="Time" categories={['Temperature (C)']} colors="indigo"/>
   </Card>
   );
 }
