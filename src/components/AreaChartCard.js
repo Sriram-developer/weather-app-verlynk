@@ -5,7 +5,7 @@ import { Card,Title,AreaChart } from "@tremor/react";
 function AreaChartCard({ weatherDetails }) {
     const [chartData, setChartData] = useState([]);
  useEffect(() => {
-    const hourly = weatherDetails?.hourly?.time?.map((time) => new Date(time).toLocaleString("en-US" , { hour:"numeric", hour12: false }).slice(0, 24))
+    const hourly = weatherDetails?.hourly?.time?.map((time) => new Date(time).toLocaleString("en-US" , { hour:"numeric", hour12: false }).slice(0, 24));
 
   
         setChartData(
