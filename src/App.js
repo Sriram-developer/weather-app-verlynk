@@ -35,8 +35,14 @@ function App() {
        e.preventDefault();
 
        // fetching the open api  
-       const fetchWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${selectedCity?.values?.latitude}&longitude=${selectedCity?.values?.longitude}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_180m,temperature_180m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,uv_index_clear_sky_max,wind_speed_10m_max`)
-   }
+       const fetchWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${selectedCity?.value?.latitude}&longitude=${selectedCity?.value?.longitude}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_180m&timezone=GMT`)
+
+       const data = await fetchWeather.json();
+
+       setWeatherDetails(data);
+   };
+
+   console.log(weatherDetails);
 
   
   return (
@@ -95,3 +101,5 @@ function App() {
 }
 
 export default App;
+
+
