@@ -99,7 +99,7 @@ function App() {
         </div>
 
         <div>
-        <AreaChartCard/>
+        <AreaChartCard weatherDetails={weatherDetails}/>
         </div>
       </div>
     </div>
