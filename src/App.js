@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 import { City, Country } from "country-state-city";
 import { Card,Metric,Title } from "@tremor/react"
+import AreaChartCard from "./components/AreaChartCard";
 
 function App() {
   const [allCountries, setAllCountries] = useState([]);
@@ -50,6 +51,7 @@ function App() {
       {/* Sidebar */}
       <div className="flex flex-col space-y-3 h-screen bg-blue-950 p-3 w-[20%]">
        {/* Form */}
+       <h2 className=" flex text-white font-semibold text-lg">Weather form</h2>
        <Select options={allCountries} value={selectedCountry} onChange={handleSelectedCountry}/>
 
        <Select options={City.getCitiesOfCountry(selectedCountry?.value?.isoCode).map(
@@ -82,18 +84,22 @@ function App() {
         <div className="flex item-center space-x-2">
           <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
             <Title>Temperature</Title>
-            <Metric>23</Metric>
+            <Metric>{weatherDetails?.hourly?.temperature_2m[0]} &#x2103;</Metric>
           </Card>
 
           <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
-            <Title>Temperature</Title>
-            <Metric>23</Metric>
+            <Title>Wind Speed</Title>
+            <Metric>{weatherDetails?.hourly?.wind_speed_180m[0]} km/h</Metric>
           </Card>
 
           <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
-            <Title>Temperature</Title>
-            <Metric>23</Metric>
+            <Title>Humid Level</Title>
+            <Metric>{weatherDetails?.hourly?.relative_humidity_2m[0]} %</Metric>
           </Card>
+        </div>
+
+        <div>
+        <AreaChartCard/>
         </div>
       </div>
     </div>
