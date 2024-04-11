@@ -24,7 +24,7 @@ function Navbar({ currentDate }) {
         <div>
           <h1 className="text-lg font-semibold">Verlynk Weather</h1>
         </div>
-        <div>
+        <div className="flex space-x-10">
           <p className="text-sm">Today's Date: {currentDate}</p>
           <p className="text-sm">Current Time: {currentTime}</p> 
 
