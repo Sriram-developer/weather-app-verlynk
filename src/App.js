@@ -7,7 +7,7 @@ import LIneChartCard from "./components/LIneChartCard";
 
 function Navbar({ currentDate }) {
   return (
-    <nav className="bg-blue-900 text-white p-4">
+    <nav className="bg-blue-950 sticky top-0 z-10 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div>
           <h1 className="text-lg font-semibold">Weather App</h1>
@@ -68,9 +68,10 @@ function App() {
   return (
     <div>
        <Navbar currentDate={currentDate} />
-    <div className="flex max-7xl mx-auto space-x-2  py-10">
+    <div className="flex space-x-60 mx-16  py-2">
       {/* Sidebar */}
-      <div className="flex flex-col space-y-3 h-screen bg-blue-950 p-3 w-[18%]">
+      <div className="fixed  left-0 right-0 flex flex-col space-y-6 h-screen bg-blue-950 py-3 p-3 w-[18%]">
+
        {/* Form */}
        <h2 className=" flex text-white font-semibold text-lg">Weather form</h2>
        <Select options={allCountries} value={selectedCountry} onChange={handleSelectedCountry}/>
@@ -101,7 +102,7 @@ function App() {
        
       </div>
       {/* Body */}
-      <div className="w-[75%]">
+      <div className="w-[82%] ">
         <div className="flex item-center space-x-2">
           <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
             <Title>Temperature</Title>
@@ -119,11 +120,12 @@ function App() {
           </Card>
         </div>
 
-        <div>
+        <div h-screen w-screen>
         <AreaChartCard weatherDetails={weatherDetails}/>
         <LIneChartCard weatherDetails={weatherDetails}/>
         </div>
       </div>
+      
     </div>
     </div>
   );

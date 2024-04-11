@@ -19,7 +19,7 @@ function LineChartCard({ weatherDetails }) {
     );
   }, [weatherDetails]);
   return (
-    <Card className="!bg-gray-100 mt-5 ">
+    <Card className="!bg-gray-100 mt-5">
       <Title className="!text-black text-sm">Humidity over time</Title>
       <LineChart
         data={chartData}
