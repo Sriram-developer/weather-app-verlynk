@@ -5,11 +5,27 @@ import { Card,Metric,Title } from "@tremor/react"
 import AreaChartCard from "./components/AreaChartCard";
 import LIneChartCard from "./components/LIneChartCard";
 
+function Navbar({ currentDate }) {
+  return (
+    <nav className="bg-blue-900 text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <div>
+          <h1 className="text-lg font-semibold">Weather App</h1>
+        </div>
+        <div>
+          <p className="text-sm">Today's Date: {currentDate}</p>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 function App() {
   const [allCountries, setAllCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
   const [selectedCity, setSeletedCity] = useState([]);
   const [weatherDetails, setWeatherDetails] = useState([]);
+  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     setAllCountries(
@@ -21,8 +37,10 @@ function App() {
         },
         label: country.name,
       }))
-    )
+    );
+    setCurrentDate(new Date().toLocaleDateString());
   }, []);
+  
   
   const handleSelectedCountry = (option) => {
    setSelectedCountry (option);
@@ -48,6 +66,8 @@ function App() {
 
   
   return (
+    <div>
+       <Navbar currentDate={currentDate} />
     <div className="flex max-7xl mx-auto space-x-2  py-10">
       {/* Sidebar */}
       <div className="flex flex-col space-y-3 h-screen bg-blue-950 p-3 w-[18%]">
@@ -104,6 +124,7 @@ function App() {
         <LIneChartCard weatherDetails={weatherDetails}/>
         </div>
       </div>
+    </div>
     </div>
   );
 }
