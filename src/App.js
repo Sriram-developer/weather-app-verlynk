@@ -3,6 +3,7 @@ import Select from "react-select";
 import { City, Country } from "country-state-city";
 import { Card,Metric,Title } from "@tremor/react"
 import AreaChartCard from "./components/AreaChartCard";
+import LIneChartCard from "./components/LIneChartCard";
 
 function App() {
   const [allCountries, setAllCountries] = useState([]);
@@ -49,7 +50,7 @@ function App() {
   return (
     <div className="flex max-7xl mx-auto space-x-2  py-10">
       {/* Sidebar */}
-      <div className="flex flex-col space-y-3 h-screen bg-blue-950 p-3 w-[20%]">
+      <div className="flex flex-col space-y-3 h-screen bg-blue-950 p-3 w-[18%]">
        {/* Form */}
        <h2 className=" flex text-white font-semibold text-lg">Weather form</h2>
        <Select options={allCountries} value={selectedCountry} onChange={handleSelectedCountry}/>
@@ -80,7 +81,7 @@ function App() {
        
       </div>
       {/* Body */}
-      <div className="w-[75%] h-screen">
+      <div className="w-[75%]">
         <div className="flex item-center space-x-2">
           <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
             <Title>Temperature</Title>
@@ -100,6 +101,7 @@ function App() {
 
         <div>
         <AreaChartCard weatherDetails={weatherDetails}/>
+        <LIneChartCard weatherDetails={weatherDetails}/>
         </div>
       </div>
     </div>

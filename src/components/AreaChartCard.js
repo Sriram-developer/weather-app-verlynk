@@ -16,9 +16,9 @@ function AreaChartCard({ weatherDetails }) {
     );
  }, [weatherDetails]);
   return(
-     <Card>
+     <Card className='mt-5'>
   <Title>Temperature over Time (C)</Title>
-  <AreaChart data={chartData} index="Time" categories={['Temperature (C)']} colors="indigo"/>
+  <AreaChart data={chartData} index="Time" categories={['Temperature (C)']} colors={["indigo"]}/>
   </Card>
   );
 }
