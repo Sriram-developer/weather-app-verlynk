@@ -6,14 +6,28 @@ import AreaChartCard from "./components/AreaChartCard";
 import LIneChartCard from "./components/LIneChartCard";
 
 function Navbar({ currentDate }) {
+  const [currentTime, setCurrentTime] = useState("");
+
+  useEffect(() => {
+    // Update current time every second
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <nav className="bg-blue-950 sticky top-0 z-10 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div>
-          <h1 className="text-lg font-semibold">Weather App</h1>
+          <h1 className="text-lg font-semibold">Verlynk Weather</h1>
         </div>
         <div>
           <p className="text-sm">Today's Date: {currentDate}</p>
+          <p className="text-sm">Current Time: {currentTime}</p> 
+
         </div>
       </div>
     </nav>
@@ -104,19 +118,19 @@ function App() {
       {/* Body */}
       <div className="w-[82%] ">
         <div className="flex item-center space-x-2">
-          <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
-            <Title>Temperature</Title>
-            <Metric>{weatherDetails?.hourly?.temperature_2m[0]} &#x2103;</Metric>
+          <Card decoration="top" decorationColor="orange" className="!bg-orange-200 text-center">
+            <Title className="!text-black">Temperature</Title>
+            <Metric  className="!text-black">{weatherDetails?.hourly?.temperature_2m[0]} &#x2103;</Metric>
           </Card>
 
-          <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
-            <Title>Wind Speed</Title>
-            <Metric>{weatherDetails?.hourly?.wind_speed_180m[0]} km/h</Metric>
+          <Card decoration="top" decorationColor="blue" className="!bg-blue-200 text-center">
+            <Title className="!text-black">Wind Speed</Title>
+            <Metric  className="!text-black">{weatherDetails?.hourly?.wind_speed_180m[0]} km/h</Metric>
           </Card>
 
-          <Card decoration="top" decorationColor="green" className="bg-gray-100 text-center">
-            <Title>Humid Level</Title>
-            <Metric>{weatherDetails?.hourly?.relative_humidity_2m[0]} %</Metric>
+          <Card decoration="top" decorationColor="yellow" className="!bg-yellow-200 text-center">
+            <Title className="!text-black">Humid Level</Title>
+            <Metric  className="!text-black">{weatherDetails?.hourly?.relative_humidity_2m[0]} %</Metric>
           </Card>
         </div>
 
