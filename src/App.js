@@ -59,21 +59,34 @@ function App() {
   const handleSelectedCountry = (option) => {
    setSelectedCountry (option);
    setSeletedCity(null);
+   setWeatherDetails(null); // Reset weather details when country changes
   };
 
    const handleSelectedCity = (option) => {
     setSeletedCity(option);
    };
 
-   const getWeatherDetails  = async (e) => {
-       e.preventDefault();
+   const getWeatherDetails  = async () => {
+    if (!selectedCity) {
+      alert("Please select a city.");
+      return;
+    }
 
+    try {
        // fetching the open api  
-       const fetchWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${selectedCity?.value?.latitude}&longitude=${selectedCity?.value?.longitude}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_180m&timezone=GMT`)
-
+       const fetchWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${selectedCity?.value?.latitude}&longitude=${selectedCity?.value?.longitude}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_180m&timezone=GMT`);
+       
+       if (!fetchWeather.ok) {
+        throw new Error("Failed to fetch weather data.");
+       }
+       
        const data = await fetchWeather.json();
-
        setWeatherDetails(data);
+       
+      } catch (error) {
+        alert("Error fetching weather data. Please try again later.");
+        console.error(error);
+      }
    };
 
    console.log(weatherDetails);
@@ -89,7 +102,8 @@ function App() {
        {/* Form */}
        <h2 className=" flex text-white font-semibold text-lg">Weather form</h2>
        <Select options={allCountries} value={selectedCountry} onChange={handleSelectedCountry}/>
-
+     
+       {selectedCountry && (
        <Select options={City.getCitiesOfCountry(selectedCountry?.value?.isoCode).map(
         (city) => ({
           value: {
@@ -102,8 +116,9 @@ function App() {
        value={selectedCity}
        onChange={handleSelectedCity}
        />
+      )} 
 
-       <button onClick={getWeatherDetails} className="bg-green-400 w-full py-3 text-white text-sm font-bold hover:scale-105 transition-all duration-200 ease-in-out">Get Weather</button>
+       <button onClick={getWeatherDetails} className="bg-green-400 w-full py-3 text-white text-sm font-bold hover:scale-105 transition-all duration-200 ease-in-out"  disabled={!selectedCity}>Get Weather</button>
       
        <div className="flex flex-col space-y-2 text-white font-semibold">
         <p>{selectedCountry?.label} | {selectedCity?.label}</p> 
@@ -113,8 +128,8 @@ function App() {
        <div>
         {/* Sunrise or Sunset */}
        </div>
-       
       </div>
+
       {/* Body */}
       <div className="w-[82%] ">
         <div className="flex item-center space-x-2">
@@ -139,7 +154,6 @@ function App() {
         <LIneChartCard weatherDetails={weatherDetails}/>
         </div>
       </div>
-      
     </div>
     </div>
   );
