@@ -89,15 +89,15 @@ function App() {
       }
    };
 
-   console.log(weatherDetails);
+   //console.log(weatherDetails);
 
   
   return (
     <div>
        <Navbar currentDate={currentDate} />
-    <div className="flex space-x-60 mx-16  py-2">
+    <div className="md:flex md:space-x-60 md:mx-16  md:py-2 px-2 py-8">
       {/* Sidebar */}
-      <div className="fixed  left-0 right-0 flex flex-col space-y-6 h-screen bg-blue-950 py-3 p-3 w-[18%]">
+      <div className="md:fixed  md:left-0 md:right-0 flex flex-col space-y-6 h-screen bg-blue-950 py-3 p-3 md:w-[18%]">
 
        {/* Form */}
        <h2 className=" flex text-white font-semibold text-lg">Weather form</h2>
@@ -131,19 +131,19 @@ function App() {
       </div>
 
       {/* Body */}
-      <div className="w-[82%] ">
-        <div className="flex item-center space-x-2">
-          <Card decoration="top" decorationColor="orange" className="!bg-orange-200 text-center">
+      <div className="md:w-[82%] ">
+        <div className="flex flex-col md:flex-row md:justify-center md:space-x-2 md:space-y-2">
+          <Card decoration="top" decorationColor="orange" className="!bg-orange-200 text-center my-2 md:my-0">
             <Title className="!text-black">Temperature</Title>
             <Metric  className="!text-black">{weatherDetails?.hourly?.temperature_2m[0]} &#x2103;</Metric>
           </Card>
 
-          <Card decoration="top" decorationColor="blue" className="!bg-blue-200 text-center">
+          <Card decoration="top" decorationColor="blue" className="!bg-blue-200 text-center my-2 md:my-0">
             <Title className="!text-black">Wind Speed</Title>
             <Metric  className="!text-black">{weatherDetails?.hourly?.wind_speed_180m[0]} km/h</Metric>
           </Card>
 
-          <Card decoration="top" decorationColor="yellow" className="!bg-yellow-200 text-center">
+          <Card decoration="top" decorationColor="yellow" className="!bg-yellow-200 text-center my-2 md:my-0">
             <Title className="!text-black">Humid Level</Title>
             <Metric  className="!text-black">{weatherDetails?.hourly?.relative_humidity_2m[0]} %</Metric>
           </Card>
